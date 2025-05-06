@@ -3,21 +3,21 @@ import Footer from "../../components/footer/Footer"
 import Header from "../../components/header/Header"
 import Lista from "../../components/lista/Lista"
 
-const CadastrarEvento = () => {
+const CadastrarTipoDeUsuario = () => {
     return (
         <>
             <Header />
             <Cadastro
-                titulo="Cadastrar Evento"
-                
+                titulo="Cadastrar Tipo de Usuario"
+                visibilidade="none"
             />
             <Lista 
-            titulo="Lista de Evento"
-            tdnome="Tipo de Evento"
+            titulo="Lista Tipo de Usuario"
+            tdnome="Tipo de Usuario"
             />
             <Footer />
         </>
     )
 }
 
-export default CadastrarEvento;
+export default CadastrarTipoDeUsuario;

@@ -3,16 +3,16 @@ import Footer from "../../components/footer/Footer"
 import Header from "../../components/header/Header"
 import Lista from "../../components/lista/Lista"
 
-const CadastrarEvento = () => {
+const CadastrarTipoEvento = () => {
     return (
         <>
             <Header />
             <Cadastro
-                titulo="Cadastrar Evento"
-                
+                titulo="Cadastrar Tipo de Evento"
+                visibilidade="none"
             />
             <Lista 
-            titulo="Lista de Evento"
+            titulo="Lista Tipo de evento"
             tdnome="Tipo de Evento"
             />
             <Footer />
@@ -20,4 +20,4 @@ const CadastrarEvento = () => {
     )
 }
 
-export default CadastrarEvento;
+export default CadastrarTipoEvento;

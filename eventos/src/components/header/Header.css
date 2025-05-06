@@ -35,3 +35,14 @@ header{
     height: 13px;
     margin-left: 10px;
 }
+
+@media screen and (max-width: 768px) {
+    .cabecalho img{
+        height: 35px;
+    }
+
+    .link_header{
+        margin-left: 10px;
+    }
+
+}

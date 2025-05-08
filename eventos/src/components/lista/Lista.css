@@ -45,21 +45,41 @@
 
 
 .tabela .table_cabecalho :first-child {
-    width: 600px;
+    width: 300px;
     
 }
 
 .tabela .table_cabecalho :nth-child(2) {
-    width: 550px;
-    
+    width: 760px;
+    text-align: start;
 }
 
 .tabela .table_cabecalho th {
     border-bottom: 1px solid white;
     width: 100px;
     margin-top: 40px;
+    
 }
 
 .item_lista td {
-    padding: 30px 5px 0;
+    padding: 30px 5px 30px;
+    
+}
+
+.tabela .item_lista :nth-child(2){
+    text-align: start;
+    
+}
+
+@media screen and (max-width:728px) {
+    .tabela{
+        font-size: 10px; 
+    }
+    .tabela .item_lista :nth-child(3){
+        width: 110px;
+    }
+    .listagem h1 {
+        font-size: large;
+    }
+    
 }

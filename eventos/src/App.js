@@ -1,17 +1,13 @@
 
 import './App.css';
-import CadastrarTipoDeUsuario from './pages/cadastrarTipoDeUsuario/CadastrarTipoDeUsuario';
-import CadastrarEvento from './pages/cadastroEvento/CadastroEvento';
-import CadastrarTipoEvento from './pages/cadastroTipoEvento/CadastroTipoEvento';
-import Login from './pages/login/Login';
+import ListagemEventos from './pages/listagemEventos/ListagemEventos';
+import Rotas from './Routes/routes';
 
 function App() {
   return (
     <>
-      {/* <Login/> */}
-      {/* <CadastrarTipoEvento/> */}
-      <CadastrarTipoDeUsuario/>
-      {/* <CadastrarEvento/> */}
+      <Rotas/>
+      {/* <ListagemEventos/> */}
     </>
   );
 }

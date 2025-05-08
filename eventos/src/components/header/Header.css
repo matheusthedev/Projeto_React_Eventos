@@ -37,12 +37,17 @@ header{
 }
 
 @media screen and (max-width: 768px) {
-    .cabecalho img{
-        height: 35px;
+    .header-header img{
+        height: 15px;
     }
-
-    .link_header{
-        margin-left: 10px;
+    .header-header{
+        justify-content: center;
+        align-items: center;
     }
-
+    .link-header{
+        display: none;
+    }
+    .navas_header{
+        display: none;
+    }
 }

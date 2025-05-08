@@ -3,7 +3,7 @@ import Logo from "../../assets/img/logo1.svg"
 import Logo_adm from "../../assets/img/Vector.png"
 
 
-const Header = () => {
+const Header = (props) => {
     return (
         <header>
             <div className="layout_grid cabecalho">
@@ -15,7 +15,7 @@ const Header = () => {
                     <a href="" className="link_header">Contatos</a>
                 </nav>
                 <div className="Adm">
-                    <a href="" className="link_header">Administrador</a>
+                    <a href="" className="link_header">{props.nomeUsu}</a>
                     <img src={Logo_adm} alt="Vetor" />
                 </div>
 

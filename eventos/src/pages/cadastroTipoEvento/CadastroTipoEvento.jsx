@@ -13,7 +13,7 @@ import Banner from "../../assets/img/banner.png"
 const CadastrarTipoEvento = () => {
     const [tipoevento, setTipoEvento] = useState("");
     const [listaTipoEvento, setListaTipoEvento] = useState([])
-    const [deletaTipoEvento, setDeletaTipoEvento] = useState();
+    // const [deletaTipoEvento, setDeletaTipoEvento] = useState();
 
 
     function alertar(icone, mensagem) {
@@ -71,37 +71,20 @@ const CadastrarTipoEvento = () => {
         }
     }
 
-    async function removerTipoEvento(id, warning) {
+    async function removerTipoEvento(id) {
         try {
-            const excluirTipoEvento = await api.delete(`tiposEventos/${id}`)
-            setDeletaTipoEvento(excluirTipoEvento.data)
+            const excluirTipoEvento = await api.delete(`tiposEventos/${id.idTipoEvento}`)
+            setListaTipoEvento(excluirTipoEvento.data)
 
-            Swal.fire({
-                title: "Você tem certeza que quer excluir?",
-                text: "Você não vai poder reverter isso!",
-                icon: warning,
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Confirmar"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "Deletado!",
-                        text: "Deletado com sucesso!",
-                        icon: "success"
-                    });
-                }
-            });
         }
         catch (error) {
             console.log(error)
         }
     }
 
-    async function editarTipoEvento(tipoEvento) {
+    async function editarTipoEvento(tipoevento){
         const { value: novoTipoEvento } = await Swal.fire({
-            title: "Modifique seu Tipo Evento",
+            title: "Modifique seu Tipo de Evento",
             input: "text",
             inputLabel: "Novo Tipo Evento",
             inputValue: tipoevento.tituloTipoEvento,
@@ -113,41 +96,52 @@ const CadastrarTipoEvento = () => {
             }
         });
 
-
-        useEffect(() => {
-            listarTipoEvento();
-        }, [listaTipoEvento])
-
-
-
-        return (
-            <>
-                <Header nomeUsu="Administrador" />
-                <Cadastro
-                    titulo="Cadastrar Tipo de Evento"
-                    visibilidade="none"
-                    imagem={Banner}
-                    place="Titulo"
-
-                    funcCadastro={cadastrarTipoEvento}
-
-                    valorInput={tipoevento}
-                    setValorInput={setTipoEvento}
-                />
-                <Lista
-                    titulo="Lista Tipo de evento"
-                    tdnome="Nome Evento"
-                    tituloEvento="Titulo"
-
-                    lista={listaTipoEvento}
-
-                    deletar={removerTipoEvento}
-                    funcEditar={editarTipoEvento}
-                />
-                <Footer />
-            </>
-        )
+        if (novoTipoEvento) {
+            try {
+                api.put(`tiposEventos/${tipoevento.idTipoEvento}`, {tituloTipoEvento : novoTipoEvento})
+                Swal.fire(`O Tipo novo é ${novoTipoEvento}`);
+                listaTipoEvento();
+            } catch (error) {
+                
+            }
+        }
     }
+
+
+    useEffect(() => {
+        listarTipoEvento();
+    }, [listaTipoEvento])
+
+
+
+    return (
+        <>
+            <Header nomeUsu="Administrador" />
+            <Cadastro
+                titulo="Cadastrar Tipo de Evento"
+                visibilidade="none"
+                imagem={Banner}
+                place="Titulo"
+
+                funcCadastro={cadastrarTipoEvento}
+
+                valorInput={tipoevento}
+                setValorInput={setTipoEvento}
+            />
+            <Lista
+                titulo="Lista Tipo de evento"
+                tdnome="Nome Evento"
+                tituloEvento="Titulo"
+                tipoLista="tiposEventos"
+                lista={listaTipoEvento}
+
+                deletar={removerTipoEvento}
+            funcEditar={editarTipoEvento}
+            />
+            <Footer />
+        </>
+    )
 }
 
-    export default CadastrarTipoEvento;
+
+export default CadastrarTipoEvento;

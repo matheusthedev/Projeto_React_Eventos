@@ -28,11 +28,18 @@ const Cadastro = (props) => {
                         </div>
                         <div className="campo_cad_titulo opcao" style={{ display: props.visibilidade }}>
                             <label htmlFor="Nome"></label>
-                            <select name="Tipo De Evento" id="" className="select_cad">
+                            <select name="Tipo De Evento" id="" className="select_cad"
+                                value={props.valorSelect}
+                                onChange={(e) => props.setValorSelect(e.target.value)}
+                            >
+
                                 <option value="" disabled selected>Tipo de Evento</option>
-                                <option value="">op 1</option>
-                                <option value="">op 2</option>
-                                <option value=""> op 3</option>
+                                {props.lista && props.lista.length > 0 && props.lista.map((itemTipoEvento) => (
+                                    (
+                                        <option value={itemTipoEvento.idTipoEvento}>{itemTipoEvento.tituloTipoEvento}</option>
+
+                                    ))
+                                )}
                             </select>
                         </div>
 

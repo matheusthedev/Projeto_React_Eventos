@@ -11,96 +11,110 @@ import Banner from "../../assets/img/imagem2.png"
 
 const CadastrarEvento = () => {
     const [evento, setEvento] = useState("");
+    const [dataevento, setDataEvento] = useState("");
+    const [descricao, setDescricao] = useState("");
+    const [instituicao, setInstituicao] = useState("1FE163A5-E810-4680-85AD-265D335FC2C0");
     const [tipoevento, setTipoEvento] = useState("");
     const [listaTipoEvento, setListaTipoEvento] = useState([])
     const [listaEvento, setListaEvento] = useState([])
 
     function alertar(icone, mensagem) {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-            Toast.fire({
-                icon: icone,
-                title: mensagem
-            });
-        }
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: icone,
+            title: mensagem
+        });
+    }
 
-    async function listarTipoEvento(){
+    async function listarTipoEvento() {
         try {
             const resposta = await api.get("tiposEventos");
             setListaTipoEvento(resposta.data);
         } catch (error) {
             console.log(error);
-            
+
         }
 
     }
 
 
-    async function listarEvento(){
+    async function listarEvento() {
         try {
             const resposta = await api.get("eventos")
             setListaEvento(resposta.data)
         } catch (error) {
             console.log(error);
-            
+
         }
     }
 
-    async function cadastrarEvento(evt){
+    async function cadastrarEvento(evt) {
         evt.preventDefault();
-        if(evento.trim() != ""){
+        if (evento.trim() != "") {
             try {
-                await api.post("eventos", {nomeEvento: evento, idTipoEvento: tipoevento});
-                alertar("success","Deu certo");
+                await api.post("eventos", { nomeEvento: evento, idTipoEvento: tipoevento, dataEvento: dataevento, descricao: descricao, idInstituicao: instituicao });
+                alertar("success", "Cadastro realizado com sucesso!");
                 setEvento("");
+                setDataEvento();
+                setDescricao("");
                 setTipoEvento("");
-                
+
             } catch (error) {
-                alertar("error","Entre em contato com o suporte")
+                alertar("error", "Entre em contato com o suporte")
             }
         } else {
-            alertar("error","Preencha o campo vazio")
+            alertar("error", "Preencha o campo vazio")
 
         }
     }
 
-        useEffect(() => {
+    useEffect(() => {
         listarTipoEvento();
     }, []);
 
     return (
         <>
-            <Header nomeUsu="Administrador"/>
+            <Header nomeUsu="Administrador" />
             <Cadastro
                 titulo="Cadastrar Evento"
                 imagem={Banner}
                 place="Nome"
 
-                funcCadastro = {cadastrarEvento}
+                funcCadastro={cadastrarEvento}
 
-                valorInput = {evento}
-                setValorInput = {setEvento}
+                valorInput={evento}
+                setValorInput={setEvento}
 
-                valorSelect = {tipoevento}
-                setValorSelect = {setTipoEvento}
+                valorSelect={tipoevento}
+                setValorSelect={setTipoEvento}
 
-                lista = {listaTipoEvento}
+                valorSelect2={instituicao}
+                setValorSelect2={setInstituicao}
+
+                valorDate={dataevento}
+                setValorDate={setDataEvento}
+
+                valorText={descricao}
+                setValorText={setDescricao}
+
+                lista={listaTipoEvento}
             />
-            <Lista 
-            titulo="Lista de Evento"
-            tdnome="Nome Evento"
-            tituloEvento="Nome"
-            nomeEvento1="Titulo Evento"
-            nomeEvento2="Titulo Evento"
+            <Lista
+                titulo="Lista de Evento"
+                tdnome="Nome Evento"
+                tituloEvento="Nome"
+                nomeEvento1="Titulo Evento"
+                nomeEvento2="Titulo Evento"
             />
             <Footer />
         </>

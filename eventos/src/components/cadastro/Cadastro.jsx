@@ -25,6 +25,13 @@ const Cadastro = (props) => {
                                 value={props.valorInput}
                                 onChange={(e) => props.setValorInput(e.target.value)}
                             />
+
+                        </div>
+                        <div className="campo_cad_titulo">
+                            <input type="date"
+                                value={props.valorDate}
+                                onChange={(e) => props.setValorDate(e.target.value)}
+                            />
                         </div>
                         <div className="campo_cad_titulo opcao" style={{ display: props.visibilidade }}>
                             <label htmlFor="Nome"></label>
@@ -41,6 +48,19 @@ const Cadastro = (props) => {
                                     ))
                                 )}
                             </select>
+
+                        </div>
+                        <div className="campo_cad_titulo">
+                            <select name="" id=""
+                                value={props.valorSelect2}
+                                onChange={(e) => props.setValorSelect2(e.target.value)}
+                            >
+                                <option selected value="">Senai</option>
+                            </select>
+                            <textarea name="" id="" placeholder="Descrição" className="descricao"
+                                value={props.valorText}
+                                onChange={(e) => props.setValorText(e.target.value)}
+                            ></textarea>
                         </div>
 
                         <Botao nomeBotao="Cadastrar" />

@@ -17,6 +17,7 @@ const CadastrarEvento = () => {
     const [tipoevento, setTipoEvento] = useState("");
     const [listaTipoEvento, setListaTipoEvento] = useState([])
     const [listaEvento, setListaEvento] = useState([])
+    const [excluirEvento, setExcluirEvento] = useState([])
 
     function alertar(icone, mensagem) {
         const Toast = Swal.mixin({
@@ -58,9 +59,19 @@ const CadastrarEvento = () => {
         }
     }
 
+    async function removerEvento(id) {
+        try {
+            const excluirEvento = await api.delete(`eventos/${id.idEvento}`)
+            setExcluirEvento(excluirEvento.data)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
     async function cadastrarEvento(evt) {
         evt.preventDefault();
-        if (evento.trim() != "") {
+        if (evento.trim() !== "") {
             try {
                 await api.post("eventos", { nomeEvento: evento, idTipoEvento: tipoevento, dataEvento: dataevento, descricao: descricao, idInstituicao: instituicao });
                 alertar("success", "Cadastro realizado com sucesso!");
@@ -80,7 +91,8 @@ const CadastrarEvento = () => {
 
     useEffect(() => {
         listarTipoEvento();
-    }, []);
+        listarEvento();
+    }, [listaEvento]);
 
     return (
         <>
@@ -115,6 +127,9 @@ const CadastrarEvento = () => {
                 tituloEvento="Nome"
                 nomeEvento1="Titulo Evento"
                 nomeEvento2="Titulo Evento"
+
+                lista={listaEvento}
+                deletar={removerEvento}
             />
             <Footer />
         </>

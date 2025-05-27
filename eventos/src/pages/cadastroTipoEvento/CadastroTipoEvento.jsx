@@ -82,7 +82,7 @@ const CadastrarTipoEvento = () => {
         }
     }
 
-    async function editarTipoEvento(tipoevento){
+    async function editarTipoEvento(tipoevento) {
         const { value: novoTipoEvento } = await Swal.fire({
             title: "Modifique seu Tipo de Evento",
             input: "text",
@@ -98,11 +98,11 @@ const CadastrarTipoEvento = () => {
 
         if (novoTipoEvento) {
             try {
-                api.put(`tiposEventos/${tipoevento.idTipoEvento}`, {tituloTipoEvento : novoTipoEvento})
+                api.put(`tiposEventos/${tipoevento.idTipoEvento}`, { tituloTipoEvento: novoTipoEvento })
                 Swal.fire(`O Tipo novo é ${novoTipoEvento}`);
                 listaTipoEvento();
             } catch (error) {
-                
+
             }
         }
     }
@@ -127,6 +127,10 @@ const CadastrarTipoEvento = () => {
 
                 valorInput={tipoevento}
                 setValorInput={setTipoEvento}
+
+                data= "none"
+                desc="none"
+                Inst="none"
             />
             <Lista
                 titulo="Lista Tipo de evento"
@@ -136,7 +140,7 @@ const CadastrarTipoEvento = () => {
                 lista={listaTipoEvento}
 
                 deletar={removerTipoEvento}
-            funcEditar={editarTipoEvento}
+                funcEditar={editarTipoEvento}
             />
             <Footer />
         </>

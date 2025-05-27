@@ -118,6 +118,10 @@ const CadastrarTipoDeUsuario = () => {
 
                 valorInput={tipousuario}
                 setValorInput={setTipoUsuario}
+
+                data="none"
+                desc="none"
+                Inst="none"
             />
             <Lista
                 titulo="Lista Tipo de Usuario"

@@ -29,6 +29,7 @@ const Cadastro = (props) => {
                         </div>
                         <div className="campo_cad_titulo">
                             <input type="date"
+                                style={{ display: props.data }}
                                 value={props.valorDate}
                                 onChange={(e) => props.setValorDate(e.target.value)}
                             />
@@ -44,7 +45,6 @@ const Cadastro = (props) => {
                                 {props.lista && props.lista.length > 0 && props.lista.map((itemTipoEvento) => (
                                     (
                                         <option value={itemTipoEvento.idTipoEvento}>{itemTipoEvento.tituloTipoEvento}</option>
-
                                     ))
                                 )}
                             </select>
@@ -52,12 +52,14 @@ const Cadastro = (props) => {
                         </div>
                         <div className="campo_cad_titulo">
                             <select name="" id=""
+                                style={{ display: props.Inst }}
                                 value={props.valorSelect2}
                                 onChange={(e) => props.setValorSelect2(e.target.value)}
                             >
                                 <option selected value="">Senai</option>
                             </select>
                             <textarea name="" id="" placeholder="Descrição" className="descricao"
+                                style={{ display: props.desc }}
                                 value={props.valorText}
                                 onChange={(e) => props.setValorText(e.target.value)}
                             ></textarea>

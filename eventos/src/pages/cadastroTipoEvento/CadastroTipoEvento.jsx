@@ -95,7 +95,6 @@ const CadastrarTipoEvento = () => {
                 }
             }
         });
-
         if (novoTipoEvento) {
             try {
                 api.put(`tiposEventos/${tipoevento.idTipoEvento}`, { tituloTipoEvento: novoTipoEvento })
@@ -141,6 +140,11 @@ const CadastrarTipoEvento = () => {
 
                 deletar={removerTipoEvento}
                 funcEditar={editarTipoEvento}
+
+                ListaData="none"
+                DataEvent="none"
+                Desc1="none"
+                Desc2="none"
             />
             <Footer />
         </>

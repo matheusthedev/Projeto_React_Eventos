@@ -134,6 +134,10 @@ const CadastrarTipoDeUsuario = () => {
 
                 deletar={removerTipoUsuario}
                 funcEditar={editarTipoUsuario}
+                ListaData="none"
+                DataEvent="none"
+                Desc1="none"
+                Desc2="none"
             />
             <Footer />
         </>

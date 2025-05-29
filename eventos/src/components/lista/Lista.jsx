@@ -13,21 +13,21 @@ const Lista = (props) => {
                 <thead>
                     <tr className="table_cabecalho">
                         <th>{props.tituloEvento}</th>
-                        <th>Data Evento</th>
+                        <th style={{ display: props.DataEvent }}>Data Evento</th>
                         <th>{props.nomeEvento1}</th>
                         <th>Editar</th>
                         <th>Excluir</th>
-                        <th>Descrição</th>
+                        <th style={{ display: props.Desc2 }}>Descrição</th>
                     </tr>
                 </thead>
                 {props.lista && props.lista.length > 0 ? (
                     props.lista.map((item) => (
                         <tbody>
-                            <tr className="item_lista" key={props.tipoLista == "tiposEventos" ? item.idTipoEvento : (props.tipoLista == "tipoUsuarios" ? item.idTipoUsuario: item.idEvento)}>
+                            <tr className="item_lista" key={props.tipoLista == "tiposEventos" ? item.idTipoEvento : (props.tipoLista == "tipoUsuarios" ? item.idTipoUsuario : item.idEvento)}>
                                 <td data-cell="Nome" >
-                                    {props.tipoLista == "tiposEventos" ? item.tituloTipoEvento : (props.tipoLista == "tipoUsuarios" ? item.tituloTipoUsuario: item.nomeEvento)}
+                                    {props.tipoLista == "tiposEventos" ? item.tituloTipoEvento : (props.tipoLista == "tiposUsuarios" ? item.tituloTipoUsuario : item.nomeEvento)}
                                 </td>
-                                <td data-cell="Data">
+                                <td data-cell="Data" style={{ display: props.ListaData }}>
                                     {item.dataEvento}
                                 </td>
                                 <td data-cell="Evento">{item.tiposEvento?.tituloTipoEvento}</td>
@@ -40,8 +40,12 @@ const Lista = (props) => {
                                         style={{ cursor: "pointer" }}
                                     />
                                 </td>
-                                <td data-cell="Descrição">
-                                    <img src={Detalhes} alt="Detalhes" />
+                                <td data-cell="Descrição" style={{ display: props.Desc1 }}>
+                                    <img
+                                        src={Detalhes}
+                                        alt="Detalhes"
+                                        onClick={() => props.descricao(item)}
+                                        style={{ cursor: "pointer" }} />
                                 </td>
                             </tr>
                         </tbody>

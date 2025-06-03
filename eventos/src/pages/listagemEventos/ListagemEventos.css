@@ -59,7 +59,7 @@
 }
 
 .tabela_evento .table_evento :nth-child(2) {
-    width: 760px;
+    /* width: 760px; */
     text-align: start;
 }
 

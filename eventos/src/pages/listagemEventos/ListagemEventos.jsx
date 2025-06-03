@@ -1,33 +1,43 @@
 import { useEffect, useState } from "react";
 import api from "../../Services/services";
 import Swal from 'sweetalert2'
+import { format, compareAsc } from "date-fns";
 
 
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import "./ListagemEventos.css"
 import Comentario from "../../assets/img/comentario.png"
+import Detalhes from "../../assets/img/detalhe2.png"
 import Toggle from "../../components/toggle/Toggle";
+import Modal from "../../components/modal/Modal";
 
 
 
 const ListagemEventos = (props) => {
-    const [listaEvento, setListaEvento] = useState([])
+    const [listaEventos, setListarEventos] = useState([])
 
+    // hooks (ex: listaEventos)
+    //    funcao para listar os eventos
 
-    async function listarEvento() {
+    async function listarEventos() {
         try {
-            const resposta = await api.get("eventos")
-            setListaEvento(resposta.data)
+            const eventoListado = await api.get("eventos");
+
+            setListarEventos(eventoListado.data);
+            console.log(eventoListado.data);
+
+
         } catch (error) {
             console.log(error);
 
         }
     }
 
+
     useEffect(() => {
-        listarEvento();
-    }, [listaEvento]);
+        listarEventos();
+    }, [])
 
     return (
         <>
@@ -44,31 +54,31 @@ const ListagemEventos = (props) => {
                             <th>Titulo</th>
                             <th>Data do Evento</th>
                             <th>Tipo Evento</th>
+                            <th>Descrição</th>
                             <th>Comentários</th>
                             <th>Participar</th>
                         </tr>
                     </thead>
-                    {props.lista && props.lista.length > 0 ? (
-                    props.lista.map((item) => (
+
                     <tbody>
-                        <tr className="item_evento">
-                            <td data-cell="Nome" >{item.nomeEvento}</td>
-                            <td>{item.dataEvento}</td>
-                            <td data-cell="Evento">{item.tipoEvento}</td>
-                            <td data-cell="Comentar"><img src={Comentario} alt="Imagem de um comentario" /></td>
-                            <td data-cell="Botao"><Toggle /></td>
-                        </tr>
+                        {listaEventos.map((item) => (
+                            <tr className="item_evento">
+                                <td data-cell="Nome" >{item.nomeEvento}</td>
+                                <td data-cell="Data">{format(item.dataEvento, "dd/MM/yy")}</td>
+                                <td data-cell="Tipo_Evento">{item.tiposEvento.tituloTipoEvento}</td>
+                                <td data-cell="Descricao"><img src={Detalhes} alt="Imagem de descricao" style={{ cursor: "pointer" }}/></td>
+                                <td data-cell="Comentar"><img src={Comentario} alt="Imagem de um comentario" /></td>
+                                <td data-cell="Botao"><Toggle /></td>
+                            </tr>
+
+                        ))}
                     </tbody>
-                    ))
-                ) :
-                    (
-                        <p>Nenhum Evento Encontrado.</p>
-                    )
-                }
+
                 </div>
             </section>
             <Footer />
-            
+            <Modal/>
+
         </>
     )
 }

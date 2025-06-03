@@ -15,8 +15,9 @@ const Header = (props) => {
                     <a href="" className="link_header">Contatos</a>
                 </nav>
                 <div className="Adm">
-                    <a href="" className="link_header">{props.nomeUsu}</a>
+                    <a href="" className="link_header">{props.nomeUsu}
                     <img src={Logo_adm} alt="Vetor" />
+                    </a>
                 </div>
 
             </div>

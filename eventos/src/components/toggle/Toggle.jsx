@@ -2,17 +2,15 @@ import React from "react";
 import "./Toggle.css"
 
 const Toggle = (props) => {
-    return (
+     return (
         <>
             <div className="teste">
                 <label className="switch">
                     <input type="checkbox" 
                     checked={props.presenca}
-                    onChange={(item) => 
-                        props.manipular
-                    }
-                    />
-                    <span className="slider round"></span>
+                   onChange={props.manipular}/>
+                    <span className="slider round">
+                    </span>
                 </label>
             </div>
         </>

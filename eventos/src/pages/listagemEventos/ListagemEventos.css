@@ -12,7 +12,7 @@
 }
 
 .listagem_evento {
-    height: 570px;
+    /* height: 570px; */
 
     display: flex;
     flex-direction: column;

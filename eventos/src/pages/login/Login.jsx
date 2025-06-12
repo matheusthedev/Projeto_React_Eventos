@@ -6,6 +6,7 @@ import api from "../../Services/services"
 import { useState } from "react";
 import { userDecodeToken } from "../../auth/Auth";
 import secureLocalStorage from "react-secure-storage"
+import {useAuth} from "../../contexts/AuthContext";
 
 import {useNavigate} from 'react-router-dom'
 
@@ -17,6 +18,8 @@ const Login = () => {
     const [senha, setSenha] = useState("");
 
     const navigate = useNavigate();
+
+    const {setUsuario} = useAuth();
 
     async function realizarAutenticacao(e) {
         e.preventDefault();
@@ -35,6 +38,8 @@ const Login = () => {
                 if (token) {
                     const tokenDecodificado = userDecodeToken(token);
 
+                    setUsuario(tokenDecodificado);
+
                     secureLocalStorage.setItem("tokenLogin", JSON.stringify(tokenDecodificado))
 
                     if (tokenDecodificado.tipoUsuario === "Comum") {
@@ -42,7 +47,7 @@ const Login = () => {
                         navigate("/ListagemEventos")
                     } else{
                         //ele vai me encaminhar pra tela de cadastro de evetnos(vermelha)
-                        navigate("/CadastrarEventos")
+                        navigate("/CadastrarEvento")
                     }
                 }
 

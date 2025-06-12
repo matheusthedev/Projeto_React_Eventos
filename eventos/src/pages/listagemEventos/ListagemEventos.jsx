@@ -12,6 +12,7 @@ import Comentario from "../../assets/img/comentario.png"
 import Detalhes from "../../assets/img/detalhe2.png"
 import Toggle from "../../components/toggle/Toggle";
 import Modal from "../../components/modal/Modal";
+import {useAuth} from "../../contexts/AuthContext";
 
 
 
@@ -20,9 +21,11 @@ const ListagemEventos = (props) => {
     const [tipoModal, setTipoModal] = useState("");
     const [dadosModal, setDadosModal] = useState({});
     const [modalAberto, setModalAberto] = useState(false);
-    const [usuarioId, setUsuarioId] = useState("1057E3CD-1056-4008-BCE5-9EED2E51998E");
+    // const [usuarioId, setUsuarioId] = useState("1057E3CD-1056-4008-BCE5-9EED2E51998E");
 
     const [filtroData, setFiltroData] = useState(["todos"]);
+
+    const {usuario} = useAuth();
     
 
     function alertar(icone, mensagem) {
@@ -40,7 +43,7 @@ const ListagemEventos = (props) => {
             const eventoListado = await api.get("eventos");
             const todosOsEventos = eventoListado.data;
 
-            const respostaPresenca = await api.get("PresencasEventos/ListarMinhas/" + usuarioId)
+            const respostaPresenca = await api.get("PresencasEventos/ListarMinhas/" + usuario.idUsuario)
             const minhasPresencas = respostaPresenca.data
 
             const eventosComPresencas = todosOsEventos.map((atualEvento) => {
@@ -101,7 +104,7 @@ const ListagemEventos = (props) => {
                 Swal.fire('Confirmado!', 'Sua presenca foi confirmada.', 'success');
             } else {
                 //cadastrar uma nova presenca
-                await api.post("PresencasEventos", { situacao: true, idUsuario: usuarioId, idEvento: idEvento });
+                await api.post("PresencasEventos", { situacao: true, idUsuario: usuario.idUsuario, idEvento: idEvento });
                 Swal.fire('Confirmado!', 'Sua presenca foi confirmada.', 'success');
             }
             listarEventos()
